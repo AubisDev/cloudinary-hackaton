@@ -1,18 +1,25 @@
 import './globals.css'
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import { Open_Sans } from '@next/font/google';
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+const openSans = Open_Sans({
+  variable: "--openSans-font",
+  weight: ['300', '400', '500', '700'],
+  subsets: ['latin'],
+})
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      {/*
-        <head /> will contain the components returned by the nearest parent
-        head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
-      */}
+    <html lang="en" className={`${openSans.variable}`}>
       <head />
-      <body>{children}</body>
+      <body>
+        <Navbar />
+        <main className='w-screen h-[80vh]'>
+          {children}
+        </main>
+        <Footer/>
+      </body>
     </html>
   )
 }
