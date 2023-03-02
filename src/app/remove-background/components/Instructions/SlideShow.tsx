@@ -1,40 +1,38 @@
 'use client'
 import { motion } from 'framer-motion';
 import { ColorRing } from 'react-loader-spinner';
-import dogWithBg from '../../assets/dog-with-bg.webp'
-import dogWithoutBg from '../../assets/dog-without-bg.png'
 
 const SlideShow = () => {
   return (
-    <div className="w-full h-full flex items-center justify-center">
+    <div className="flex items-center justify-center w-full h-full">
         <div className="flex flex-row items-center justify-center">
           <motion.img
             initial={{
               opacity:0,
             }}
             animate={{
-              opacity:[0,1,0]
+              opacity:[0,1,1,1,0],
             }}
             transition={{
               delay: 0.5,
-              duration: 6
+              duration: 7,
             }}
 
             src={"https://res.cloudinary.com/demo/image/upload/w_300/wood_chair_orig.jpg"}
             alt="dog image with background"
-            className="w-[195px] h-[225px] mr-6"
+            className="w-[165px] h-[195px] mr-6"
           />
           <motion.div
             initial={{
               opacity:0,  
             }}
             animate={{
-              opacity:[0,1,0],
-
+              opacity:[0,1,1,0,0],
             }}
             transition={{
               delay: 1.5,
-              duration: 4,
+              duration: 6,
+
             }}
 
           >
@@ -56,15 +54,15 @@ const SlideShow = () => {
           animate={{
             opacity:[0,0,1,1,1],
             x: [0,0,-150,-150,-150],
-            scale: [0,0,1,1,1,1.5,1.5,1]
+            scale: [0,0,1,1,1,1.5,1,1],
           }}
           transition={{
             delay: 5,
-            duration: 4
+            duration: 4,
           }}
             src="https://res.cloudinary.com/demo/image/upload/w_300/wood_chair.jpg"
             alt="dog image without background"
-            className="w-[195px] h-[225px] ml-6"
+            className="w-[165px] h-[195px] ml-6"
           />
         </div>
 

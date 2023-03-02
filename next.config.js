@@ -7,7 +7,7 @@ const nextConfig = {
     ]
   },
   images: {
-    domains: ['images.pexels.com'],
+    domains: ['images.pexels.com', 'res.cloudinary.com', 'upload.wikimedia.org'],
   },
 }
 
