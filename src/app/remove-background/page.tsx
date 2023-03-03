@@ -1,17 +1,11 @@
-
-
-import {useDropzone} from 'react-dropzone';
-import FileUploadField from './components/FileUploadField';
-import Instructions from './components/Instructions/Instructions';
+import { ActionSection, Instructions } from "./components";
 
 const RemoveBackground = () => {
-
-
   return (
     <main className="w-[90vw] h-full m-auto flex items-center">
-      <Instructions/>
-      <FileUploadField/>
+      <Instructions />
+      <ActionSection />
     </main>
-  )
-}
-export default RemoveBackground
+  );
+};
+export default RemoveBackground;

@@ -1,8 +1,9 @@
+'use client'
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useReducer, useRef } from 'react';
+import React, { useRef } from 'react';
 import { useState, useEffect } from 'react';
-import { ColorRing } from 'react-loader-spinner';
+import { Blocks } from 'react-loader-spinner';
 
 interface ImageEditProps{
     url: string,
@@ -26,16 +27,14 @@ const ImageEdit = ({url}: ImageEditProps) => {
       <aside className='flex flex-col flex-wrap items-center justify-center w-full mt-12 text-white'>
         
             <div className={`${proccessingImage ? 'block' : 'hidden'}`}> 
-              <ColorRing
-                visible={true}
-                height="80"
-                width="80"
-                ariaLabel="blocks-loading"
-                wrapperStyle={{}}
-                wrapperClass="blocks-wrapper"
-                colors={['#15803d', '#000000', '#15803d', '#000000', '#15803d']}
-                
-              />
+            <Blocks
+              visible={true}
+              height="80"
+              width="80"
+              ariaLabel="blocks-loading"
+              wrapperStyle={{}}
+              wrapperClass="blocks-wrapper"
+            />
             </div>
  
             <div  className='inline-flex  rounded-md border border-[#eaeaea] p-2'>

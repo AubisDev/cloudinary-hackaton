@@ -11,6 +11,9 @@ module.exports = {
       fontFamily: {
         'display': "var(--openSans-font)",
       },
+      dropShadow: {
+        'bgrTitle': '3px 3px 0.15rem rgba(255,255,255,0.2)',
+      }
     },
   },
   plugins: [],
