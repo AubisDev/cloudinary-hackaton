@@ -15,7 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head />
       <body>
         <Navbar />
-        <main className='w-screen h-[83vh]'>
+        <main className='w-screen h-auto lg:h-[83vh]'>
           {children}
         </main>
         <Footer/>

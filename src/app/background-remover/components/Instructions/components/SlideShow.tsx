@@ -8,9 +8,9 @@ const SlideShow = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1, delay: 1 }}
-      className="flex items-center justify-center w-full h-full"
+      className="flex flex-row items-center justify-center w-full h-full"
     >
-      <div className="flex flex-row items-center justify-center">
+      <div className="flex flex-row items-center justify-center w-full -mr-32 sm:mr-0">
         <motion.img
           initial={{
             opacity: 0,
@@ -28,7 +28,7 @@ const SlideShow = () => {
             "https://res.cloudinary.com/djm3yrljp/image/upload/v1677820520/ugtrvgfsw9egqbrizmwt.webp"
           }
           alt="dog image with background"
-          className="w-[165px] h-[195px] mr-6"
+          className="w-[120px] h-[150px] sm:w-[165px] sm:h-[195px] sm:mr-6 "
         />
         <motion.div
           initial={{
@@ -49,9 +49,10 @@ const SlideShow = () => {
             height="80"
             width="80"
             ariaLabel="blocks-loading"
-            wrapperStyle={{}}
+            wrapperStyle={{ marginRight:"-13rem"}}
             wrapperClass="blocks-wrapper"
             colors={["#367a1a", "#367a1a", "#367a1a", "#367a1a", "#367a1a"]}
+            
           />
         </motion.div>
 
@@ -72,7 +73,7 @@ const SlideShow = () => {
           }}
           src="https://res.cloudinary.com/djm3yrljp/image/upload/v1677820758/ugtrvgfsw9egqbrizmwt_dlvuzr.webp"
           alt="dog image without background"
-          className="w-[165px] h-[195px] ml-6"
+          className="w-[150px] h-[175px] sm:w-[165px] sm:h-[195px] ml-6"
         />
       </div>
     </motion.div>
