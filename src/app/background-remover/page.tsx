@@ -1,6 +1,6 @@
 import { ActionSection, Instructions } from "./components";
 
-const RemoveBackground = () => {
+const BackgroundRemover = () => {
   return (
     <main className="w-[90vw] h-full m-auto flex items-center">
       <Instructions />
@@ -8,4 +8,4 @@ const RemoveBackground = () => {
     </main>
   );
 };
-export default RemoveBackground;
+export default BackgroundRemover;

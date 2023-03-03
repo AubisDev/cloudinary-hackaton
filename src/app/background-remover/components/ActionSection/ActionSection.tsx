@@ -2,21 +2,13 @@
 
 import { useState, useCallback } from "react";
 import { FileRejection, useDropzone } from "react-dropzone";
-import { Cloudinary } from "@cloudinary/url-gen/instance/Cloudinary";
-import { backgroundRemoval } from "@cloudinary/url-gen/actions/effect";
-import axios from "axios";
 import Link from "next/link";
 import { Preview, ImageEdit } from "./components";
-
-const cld = new Cloudinary({
-  cloud: {
-    cloudName: "djm3yrljp",
-    apiKey: "913993542954166",
-  },
-  url: {
-    secure: true,
-  },
-});
+import {
+  applyBackgroundRemoval,
+  createFormDataToUploadImage,
+} from "./utilities/cloudinaryActions";
+import { Notifier, throwErrorNotification } from "./utilities/toastNotify";
 
 const ActionSection = () => {
   const [image, setImage] = useState<string>("");
@@ -26,37 +18,17 @@ const ActionSection = () => {
   const onDrop = useCallback(
     async (acceptedFiles: File[], rejectedFiles: FileRejection[]) => {
       if (acceptedFiles.length === 1) {
-        const formData = new FormData();
-        formData.append("file", acceptedFiles[0]);
-        formData.append("upload_preset", "e1yikncv");
-        formData.append("timestamp", String(Date.now() / 1000));
-        formData.append("api_key", "913993542954166");
         setLoading(true);
-        return await axios
-          .post(
-            "https://api.cloudinary.com/v1_1/djm3yrljp/image/upload",
-            formData,
-            {
-              headers: { "X-Requested-With": "XMLHttpRequest" },
-            }
-          )
-          .then((response) => {
-            const data = response.data;
-            const publicId = data.public_id;
-            const imageWithoutBackground = cld
-              .image(publicId)
-              .effect(backgroundRemoval());
-            const imageWithBackground = data.secure_url;
-            setOriginalImage(imageWithBackground);
-            setImage(imageWithoutBackground.toURL());
-          });
+        const formData = createFormDataToUploadImage(acceptedFiles);
+        const imageLinks = await applyBackgroundRemoval(formData);
+       
+        setOriginalImage(imageLinks.originalImageLink);
+        setImage(imageLinks.imageWithoutBackgroundLink);
+        setLoading(false);
       } else {
-        console.log("Error al subir archivo");
+        throwErrorNotification();
       }
-      setLoading(false);
-      console.log({ acceptedFiles, rejectedFiles });
-    },
-    []
+    },[]
   );
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -82,11 +54,22 @@ const ActionSection = () => {
         <em className="text-xs">(1 file only for free version)</em>
       </form>
       <aside className="flex flex-row text-white ">
-        {originalImage.length !== 0 ? <Preview url={originalImage} /> : null}
+        {originalImage.length !== 0 && !loading ? <Preview url={originalImage} /> : null}
         {image.length !== 0 ? <ImageEdit url={image} /> : null}
       </aside>
+      <DownloadImageLink image={image}/>
+      <Notifier />
+    </section>
+  );
+};
+export default ActionSection;
 
-      {image.length !== 0 ? (
+
+
+export const DownloadImageLink = (image: any) => {
+  return(
+    <>
+    {image.length !== 0 ? (
         <Link
           href={image}
           target="_blank"
@@ -95,7 +78,6 @@ const ActionSection = () => {
           Get full size image
         </Link>
       ) : null}
-    </section>
-  );
-};
-export default ActionSection;
+    </>
+  )
+}
